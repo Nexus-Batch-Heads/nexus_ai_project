@@ -1,0 +1,447 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ========== THEME VARIABLES ========== */
+:root {
+  /* Neon accent colors (shared) */
+  --neon-cyan: #00f5ff;
+  --neon-purple: #b829ff;
+  --neon-pink: #ff2eea;
+  --neon-green: #39ff14;
+  --neon-blue: #4361ee;
+}
+
+/* Dark Theme (default) */
+.dark {
+  --bg-primary: #0a0a0f;
+  --bg-secondary: #0f0f1a;
+  --bg-card: rgba(15, 15, 26, 0.6);
+  --bg-card-hover: rgba(15, 15, 26, 0.8);
+  --bg-input: rgba(255, 255, 255, 0.03);
+  --bg-input-focus: rgba(255, 255, 255, 0.05);
+  --bg-glass: rgba(15, 15, 26, 0.6);
+  --bg-glass-strong: rgba(15, 15, 26, 0.85);
+  --bg-hover: rgba(255, 255, 255, 0.05);
+  --bg-subtle: rgba(255, 255, 255, 0.03);
+  --text-primary: #e0e0e0;
+  --text-secondary: #9ca3af;
+  --text-muted: #6b7280;
+  --text-heading: #ffffff;
+  --border-primary: rgba(255, 255, 255, 0.06);
+  --border-hover: rgba(0, 245, 255, 0.2);
+  --border-input: rgba(255, 255, 255, 0.08);
+  --border-input-focus: rgba(0, 245, 255, 0.4);
+  --shadow-glow: rgba(0, 245, 255, 0.1);
+  --scrollbar-track: #0a0a0f;
+  --scrollbar-thumb: rgba(0, 245, 255, 0.3);
+  --scrollbar-thumb-hover: rgba(0, 245, 255, 0.5);
+  --selection-bg: rgba(0, 245, 255, 0.3);
+  --btn-primary-text: #0a0a0f;
+  --btn-secondary-bg: rgba(255, 255, 255, 0.05);
+  --btn-secondary-border: rgba(255, 255, 255, 0.1);
+  --btn-secondary-text: #e0e0e0;
+  --btn-secondary-hover-bg: rgba(255, 255, 255, 0.1);
+  --grid-opacity: 0.02;
+  --placeholder-color: rgba(255, 255, 255, 0.3);
+  --msg-user-bg: rgba(0, 245, 255, 0.15);
+  --msg-assistant-bg: rgba(255, 255, 255, 0.05);
+}
+
+/* Light Theme */
+.light {
+  --bg-primary: #f8f9fc;
+  --bg-secondary: #ffffff;
+  --bg-card: rgba(255, 255, 255, 0.88);
+  --bg-card-hover: rgba(255, 255, 255, 0.96);
+  --bg-input: rgba(0, 0, 0, 0.04);
+  --bg-input-focus: rgba(0, 0, 0, 0.06);
+  --bg-glass: rgba(255, 255, 255, 0.75);
+  --bg-glass-strong: rgba(255, 255, 255, 0.92);
+  --bg-hover: rgba(0, 0, 0, 0.06);
+  --bg-subtle: rgba(0, 0, 0, 0.03);
+  --text-primary: #111827;
+  --text-secondary: #374151;
+  --text-muted: #6B7280;
+  --text-heading: #030712;
+  --border-primary: rgba(0, 0, 0, 0.10);
+  --border-hover: rgba(67, 97, 238, 0.3);
+  --border-input: rgba(0, 0, 0, 0.15);
+  --border-input-focus: rgba(67, 97, 238, 0.5);
+  --shadow-glow: rgba(67, 97, 238, 0.1);
+  --scrollbar-track: #f0f0f5;
+  --scrollbar-thumb: rgba(67, 97, 238, 0.3);
+  --scrollbar-thumb-hover: rgba(67, 97, 238, 0.5);
+  --selection-bg: rgba(67, 97, 238, 0.2);
+  --btn-primary-text: #ffffff;
+  --btn-secondary-bg: rgba(0, 0, 0, 0.05);
+  --btn-secondary-border: rgba(0, 0, 0, 0.12);
+  --btn-secondary-text: #111827;
+  --btn-secondary-hover-bg: rgba(0, 0, 0, 0.10);
+  --grid-opacity: 0.04;
+  --placeholder-color: rgba(0, 0, 0, 0.5);
+  --msg-user-bg: rgba(67, 97, 238, 0.12);
+  --msg-assistant-bg: rgba(0, 0, 0, 0.04);
+}
+
+/* ========== BASE STYLES ========== */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, sans-serif;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+/* Selection */
+::selection {
+  background: var(--selection-bg);
+  color: var(--text-heading);
+}
+
+/* ========== COMPONENT CLASSES ========== */
+@layer components {
+  /* Glassmorphism */
+  .glass {
+    background: var(--bg-glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border-primary);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+
+  .glass-strong {
+    background: var(--bg-glass-strong);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid var(--border-primary);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+
+  .glass-hover {
+    transition: all 0.3s ease;
+  }
+  .glass-hover:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--border-hover);
+    box-shadow: 0 0 30px var(--shadow-glow);
+  }
+
+  /* Neon glow effects */
+  .neon-glow-cyan {
+    box-shadow: 0 0 20px rgba(0, 245, 255, 0.15), 0 0 40px rgba(0, 245, 255, 0.05);
+  }
+  .neon-glow-purple {
+    box-shadow: 0 0 20px rgba(184, 41, 255, 0.15), 0 0 40px rgba(184, 41, 255, 0.05);
+  }
+  .neon-glow-pink {
+    box-shadow: 0 0 20px rgba(255, 46, 234, 0.15), 0 0 40px rgba(255, 46, 234, 0.05);
+  }
+
+  /* Text glow */
+  .text-glow-cyan {
+    text-shadow: 0 0 20px rgba(0, 245, 255, 0.5), 0 0 40px rgba(0, 245, 255, 0.2);
+  }
+  .text-glow-purple {
+    text-shadow: 0 0 20px rgba(184, 41, 255, 0.5), 0 0 40px rgba(184, 41, 255, 0.2);
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple), var(--neon-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Gradient border */
+  .gradient-border {
+    position: relative;
+    background: var(--bg-secondary);
+    border-radius: 16px;
+    transition: background-color 0.3s ease;
+  }
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(0,245,255,0.3), rgba(184,41,255,0.3), rgba(255,46,234,0.3));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* Animated background */
+  .bg-grid {
+    background-image: linear-gradient(to right, rgba(128,128,128, var(--grid-opacity)) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(128,128,128, var(--grid-opacity)) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  /* Orb */
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  .light .orb {
+    opacity: 0.15;
+  }
+
+  /* Button styles */
+  .btn-primary {
+    @apply px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300;
+    background: linear-gradient(135deg, var(--neon-cyan), var(--neon-blue));
+    color: var(--btn-primary-text);
+    box-shadow: 0 0 20px rgba(0, 245, 255, 0.2);
+  }
+  .btn-primary:hover {
+    box-shadow: 0 0 30px rgba(0, 245, 255, 0.4), 0 0 60px rgba(0, 245, 255, 0.1);
+    transform: translateY(-1px);
+  }
+  .btn-primary:active {
+    transform: translateY(0);
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300;
+    background: var(--btn-secondary-bg);
+    border: 1px solid var(--btn-secondary-border);
+    color: var(--btn-secondary-text);
+  }
+  .btn-secondary:hover {
+    background: var(--btn-secondary-hover-bg);
+    border-color: var(--border-hover);
+  }
+
+  /* Google Auth Button */
+  .google-auth-btn {
+    @apply flex items-center justify-center gap-3 px-6 py-3.5 rounded-xl font-medium text-sm transition-all duration-300;
+    background: var(--bg-input);
+    border: 1px solid var(--border-input);
+    color: var(--text-primary);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  .google-auth-btn:hover {
+    background: var(--bg-hover);
+    border-color: var(--border-hover);
+    box-shadow: 0 0 20px var(--shadow-glow);
+    transform: translateY(-1px);
+  }
+  .google-auth-btn:active {
+    transform: translateY(0);
+  }
+  .google-auth-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  /* Input styles */
+  .input-dark {
+    @apply w-full px-4 py-3 rounded-xl text-sm transition-all duration-300 outline-none;
+    background: var(--bg-input);
+    border: 1px solid var(--border-input);
+    color: var(--text-primary);
+  }
+  .input-dark::placeholder {
+    color: var(--placeholder-color);
+  }
+  .input-dark:focus {
+    border-color: var(--border-input-focus);
+    box-shadow: 0 0 20px var(--shadow-glow);
+    background: var(--bg-input-focus);
+  }
+
+  /* Card style */
+  .card-dark {
+    @apply rounded-2xl p-6 transition-all duration-300;
+    background: var(--bg-card);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border-primary);
+  }
+  .card-dark:hover {
+    border-color: var(--border-hover);
+    box-shadow: 0 4px 30px var(--shadow-glow);
+  }
+
+  /* File preview */
+  .file-preview {
+    @apply flex items-center gap-3 p-3 rounded-xl mb-2 transition-all duration-300;
+    background: var(--bg-subtle);
+    border: 1px solid var(--border-primary);
+  }
+
+  /* Theme transition */
+  .theme-transition {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+}
+
+/* Page transition container */
+.page-wrapper {
+  min-height: 100vh;
+}
+
+/* ========== LIGHT MODE OVERRIDES ========== */
+/* Ensure all hardcoded Tailwind text colors have proper contrast in light mode */
+
+/* Headings – strongest contrast */
+.light .text-white {
+  color: var(--text-heading);
+}
+
+/* Body / description text */
+.light .text-gray-300 {
+  color: #374151;
+}
+
+.light .text-gray-400 {
+  color: #374151;
+}
+
+/* Secondary / muted text */
+.light .text-gray-500 {
+  color: #4B5563;
+}
+
+.light .text-gray-600 {
+  color: #4B5563;
+}
+
+/* Background overrides */
+.light .bg-dark-900 {
+  background-color: var(--bg-primary);
+}
+
+.light .bg-dark-500 {
+  background-color: rgba(0, 0, 0, 0.10);
+}
+
+.light .bg-dark-400 {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+/* Border overrides */
+.light .border-white\/5,
+.light .border-white\/10 {
+  border-color: var(--border-primary);
+}
+
+/* Subtle backgrounds */
+.light .bg-white\/3,
+.light .bg-white\/5 {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+.light .bg-white\/10 {
+  background-color: rgba(0, 0, 0, 0.06);
+}
+
+/* Light mode chat bubbles */
+.light .bg-neon-cyan\/15 {
+  background-color: var(--msg-user-bg);
+}
+
+/* Light mode specific text adjustments */
+.light .text-dark-900 {
+  color: #0a0a0f;
+}
+
+/* ========== LIGHT MODE – ENHANCED TEXT CONTRAST ========== */
+
+/* Boost font weight slightly in light mode for better readability on glass backgrounds */
+.light body {
+  font-weight: 420;
+}
+
+/* Chat message text – ensure AI responses are clearly readable */
+.light .text-gray-300 {
+  color: #1f2937;
+  font-weight: 450;
+}
+
+/* Labels & form elements – stronger in light mode */
+.light label {
+  color: #1f2937;
+  font-weight: 500;
+}
+
+/* Placeholder visibility improvement */
+.light input::placeholder,
+.light textarea::placeholder {
+  color: rgba(0, 0, 0, 0.45);
+}
+
+/* Card text on glass backgrounds – improve readability */
+.light .card-dark {
+  background: rgba(255, 255, 255, 0.90);
+  border-color: rgba(0, 0, 0, 0.10);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.light .glass {
+  background: rgba(255, 255, 255, 0.80);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+/* Fix chat suggestion buttons in light mode */
+.light .hover\:text-neon-cyan:hover {
+  color: #2563eb;
+}
+
+/* Ensure inline bold text in chat is dark enough in light mode */
+.light strong {
+  color: var(--text-heading);
+}
+
+/* Google auth button specific light mode style */
+.light .google-auth-btn {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(0, 0, 0, 0.15);
+  color: #1f2937;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+.light .google-auth-btn:hover {
+  background: rgba(255, 255, 255, 1);
+  border-color: rgba(67, 97, 238, 0.4);
+  box-shadow: 0 2px 8px rgba(67, 97, 238, 0.12);
+}
+
+/* Light mode divider */
+.light .bg-white\/10 {
+  background-color: rgba(0, 0, 0, 0.10);
+}
+
+/* Footer text */
+.light footer {
+  border-color: rgba(0, 0, 0, 0.08);
+}
