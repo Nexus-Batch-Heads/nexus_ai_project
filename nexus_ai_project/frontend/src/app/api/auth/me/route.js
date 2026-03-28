@@ -4,7 +4,8 @@ export async function GET(request) {
   try {
     const authHeader = request.headers.get('Authorization');
 
-    const response = await fetch('http://127.0.0.1:5000/api/auth/me', {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://nexus-ai-backend-6nko.onrender.com';
+    const response = await fetch(`${apiUrl}/api/auth/me`, {
       method: 'GET',
       headers: {
         'Authorization': authHeader || '',

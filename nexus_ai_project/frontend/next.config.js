@@ -2,7 +2,7 @@
 const nextConfig = {
   experimental: {},
   images: {
-    domains: ['api.dicebear.com'],
+    domains: ['api.dicebear.com', 'nexus-ai-backend-6nko.onrender.com'],
   },
 };
 
